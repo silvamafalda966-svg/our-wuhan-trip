@@ -1,0 +1,13 @@
+{
+  "name": "我们的武汉旅行",
+  "short_name": "武汉旅行",
+  "description": "2026年10月23日至25日，两个人的武汉旅行地图与行程。",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f8f1e7",
+  "theme_color": "#f8f1e7",
+  "icons": [
+    { "src": "./assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

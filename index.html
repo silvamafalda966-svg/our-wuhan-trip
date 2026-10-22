@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#f8f1e7">
+  <meta name="description" content="2026 年 10 月 23–25 日，两个人的武汉旅行地图与行程。">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="武汉旅行">
+  <title>我们的武汉旅行</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./assets/icon.svg">
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="preconnect" href="https://tile.openstreetmap.org">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="offline-banner" id="offlineBanner" hidden>当前离线：文字行程可读，地图与实时导航暂不可用。</div>
+
+  <header class="hero" id="top">
+    <div class="hero-grain" aria-hidden="true"></div>
+    <nav class="topbar" aria-label="页面导航">
+      <a class="brand" href="#top" aria-label="返回顶部"><span>两个人</span><b>·</b><span>一座城</span></a>
+      <button class="icon-button" id="installHelpBtn" type="button" aria-label="添加到主屏幕说明">↗</button>
+    </nav>
+    <div class="hero-copy">
+      <p class="eyebrow">WUHAN · 2026.10.23—25</p>
+      <h1>我们的<br><em>武汉旅行</em></h1>
+      <p class="hero-note">从一碗热干面开始，坐一块五的轮渡过江。<br>三天，两个人，一份会记住进度的旅行手帐。</p>
+    </div>
+    <div class="hero-ticket" aria-label="车次信息">
+      <div><small>去程</small><strong>G1717</strong><span>合肥南 → 汉口</span></div>
+      <div class="ticket-time"><small>FRI</small><strong>17:02</strong><span>抵达汉口站</span></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="day-switcher-wrap" aria-labelledby="daysTitle">
+      <div class="section-heading compact">
+        <p class="section-kicker">DAY BY DAY</p>
+        <h2 id="daysTitle">今天去哪里？</h2>
+      </div>
+      <div class="day-switcher" id="daySwitcher" role="tablist" aria-label="选择旅行日期"></div>
+      <article class="day-overview" id="dayOverview" aria-live="polite"></article>
+    </section>
+
+    <section class="map-section" id="mapSection" aria-labelledby="mapTitle">
+      <div class="map-heading">
+        <div>
+          <p class="section-kicker">ROUTE AT A GLANCE</p>
+          <h2 id="mapTitle">路线一眼看懂</h2>
+        </div>
+        <button class="text-button" id="fitRouteBtn" type="button">看全程</button>
+      </div>
+      <div class="map-frame">
+        <div class="map-status" id="mapStatus">正在加载在线地图…</div>
+        <div id="map" role="application" aria-label="武汉行程交互地图"></div>
+        <div class="map-legend" aria-label="地图图例">
+          <span><i class="legend-line route"></i>行程连线</span>
+          <span><i class="legend-line ferry"></i>轮渡</span>
+        </div>
+      </div>
+      <p class="map-disclaimer">地图按当天第一次到达的不同地点依次编号 1–N；返程再次经过同一地点时不重复编号。连线仅表示游玩顺序。</p>
+    </section>
+
+    <section class="timeline-section" aria-labelledby="timelineTitle">
+      <div class="section-heading">
+        <p class="section-kicker">SLOW DOWN, LOOK AROUND</p>
+        <h2 id="timelineTitle">按这个节奏走</h2>
+      </div>
+      <div class="progress-card">
+        <div><span id="progressLabel">0 / 0 已完成</span><strong id="progressPercent">0%</strong></div>
+        <div class="progress-track"><i id="progressBar"></i></div>
+      </div>
+      <ol class="timeline" id="timeline"></ol>
+    </section>
+
+    <section class="notes-section" aria-labelledby="notesTitle">
+      <div class="section-heading">
+        <p class="section-kicker">BEFORE YOU GO</p>
+        <h2 id="notesTitle">出发前看一眼</h2>
+      </div>
+      <div class="note-grid">
+        <article><b>01</b><h3>轮渡别走错</h3><p>周六是中华路 <strong>1 号</strong>码头 → 武汉关码头。码头编号容易混淆，临行前查看“武汉两江轮渡”公告。</p></article>
+        <article><b>02</b><h3>时间会变化</h3><p>景区开放、餐厅营业、轮渡班次与票价均可能调整；页面里的时间是节奏建议，不是假装实时数据。</p></article>
+        <article><b>03</b><h3>离线不硬撑</h3><p>离线时继续看完整文字行程；地图瓦片、路况和高德实时规划必须联网，页面会明确提示。</p></article>
+        <article><b>04</b><h3>鞋要舒服</h3><p>周六步行量最大。穿防滑运动鞋，带轻便雨具和充电宝，黄鹤楼前后给腿留一点余量。</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-heart">♥</div>
+    <p>把普通的周末，过成会反复想起的三天。</p>
+    <small>路线版本 2026.10 · 地图 © OpenStreetMap contributors · 照片来源见弹窗</small>
+  </footer>
+
+  <dialog class="install-dialog" id="installDialog">
+    <button class="dialog-close" id="closeInstallBtn" type="button" aria-label="关闭">×</button>
+    <p class="section-kicker">IPHONE 主屏幕</p>
+    <h2>像 App 一样打开</h2>
+    <ol>
+      <li>用 Safari 打开这个网页。</li>
+      <li>点底部工具栏的“分享”图标。</li>
+      <li>向上滑，选择“添加到主屏幕”。</li>
+      <li>确认名称“武汉旅行”，点“添加”。</li>
+    </ol>
+    <p class="dialog-tip">首次联网打开后，文字行程会缓存到本机；地图和高德导航仍需网络。</p>
+  </dialog>
+
+  <template id="popupTemplate">
+    <article class="map-popup">
+      <div class="popup-photo"></div>
+      <div class="popup-body">
+        <p class="popup-meta"></p>
+        <h3></h3>
+        <p class="popup-copy"></p>
+        <div class="popup-cost"></div>
+        <a class="nav-button" target="_blank" rel="noopener">高德导航 <span>↗</span></a>
+      </div>
+    </article>
+  </template>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="./app.js"></script>
+</body>
+</html>
